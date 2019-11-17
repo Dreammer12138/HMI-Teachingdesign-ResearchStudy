@@ -1,17 +1,45 @@
-$('#icon').click(function() {
-	if (click_is == 1) return
-	$('#icon').animate({
-		width: "" + (width>height?height:width) + "px",
-		height: "" + (width>height?height:width) + "px",
-		width: "" + width + "px",
-		height: "" + height + "px",
-		borderRadius: "0%",
-	}, "fast", function() {
-		$('#GlyphiconOff').animate({
-			fontSize: "0px"
-		}, "fast")
+$(document).ready(function() {
+	$('#icon').click(function() {
+		if (click_is == 1) return
+		$('#icon').animate({
+			width: "" + (width>height?height:width) + "px",
+			height: "" + (width>height?height:width) + "px",
+			width: "" + width + "px",
+			height: "" + height + "px",
+			borderRadius: "0%",
+		}, "fast", function() {
+			$('#GlyphiconOff').animate({
+				fontSize: "0px"
+			}, "fast")
+		})
+		click_is = 1
 	})
-	click_is = 1
+	
+	var signup_click = 0
+	var signin_click = 1
+
+
+	$('#signupBtn').click(function() {
+		if (signup_click == 0) {
+			$('#signup').slideDown('fast')
+			$('#signin').slideUp('fast')
+			signup_click = 1
+			signin_click = 0
+		}
+		else if (signup_click == 1) {
+		}
+	})
+
+	$('#signinBtn').click(function() {
+		if (signin_click == 0) {
+			$('#signup').slideUp('fast')
+			$('#signin').slideDown('fast')
+			signin_click = 1
+			signup_click = 0
+		}
+		else if (signin_click == 1) {
+		}
+	})
 })
 
 $(window).resize(function() {
@@ -29,8 +57,6 @@ $(function() {
 	ChangeIconSize()
 	ShowIcon()
 })
-
-
 
 function ShowIcon() {
 	$('#icon').animate({
@@ -66,17 +92,8 @@ function ChangeIconSize() {
 		length_wh = "" + ((height*0.33>150)?(height*0.33):150) + "px"
 		font_size = "" + ((height*0.33>150)?(height*0.33):150)*0.6 + "px"
 	}
-	//	$('#icon').css({
-	//		"width": "" + height*0.33 + "px",
-	//		"height": "" + height*0.33 + "px"
-	//	})
 	else {
 		length_wh = "" + ((width*0.2>150)?(width*0.2):150) + "px" 
 		font_size = "" + ((width*0.33>150)?(width*0.33):150)*0.6 + "px"
 	}
-
-	//	$('#icon').css({
-	//		"width": "" + width*0.2 + "px",
-	//		"height": "" + width*0.2 + "px"
-	//	})
 }
