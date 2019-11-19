@@ -1,5 +1,5 @@
-$(document).ready(function() {
-	$('#icon').click(function() {
+$(document).ready(() => {
+	$('#icon').click(() => {
 		if (click_is == 1) return
 		$('#icon').animate({
 			width: "" + (width>height?height:width) + "px",
@@ -7,7 +7,7 @@ $(document).ready(function() {
 			width: "" + width + "px",
 			height: "" + height + "px",
 			borderRadius: "0%",
-		}, "fast", function() {
+		}, "fast", () => {
 			$('#GlyphiconOff').animate({
 				fontSize: "0px"
 			}, "fast")
@@ -19,7 +19,7 @@ $(document).ready(function() {
 	var signin_click = 1
 
 
-	$('#signupBtn').click(function() {
+	$('#signupBtn').click(() => {
 		if (signup_click == 0) {
 			$('#signup').slideDown('fast')
 			$('#signin').slideUp('fast')
@@ -27,10 +27,22 @@ $(document).ready(function() {
 			signin_click = 0
 		}
 		else if (signup_click == 1) {
+			$.post("/signup", {
+				Email: $('#Email').val(),
+				Name: $('#Name').val(),
+				Gender: $('#Gender').val(),
+				School: $('#School').val(),
+				Grade: $('#Grade').val(),
+				Class: $('#Class').val(),
+				SchoolNo: $('#SchoolNo').val(),
+				Passwd: $('#pwd2').val()
+			}, (res) => {
+
+			})
 		}
 	})
 
-	$('#signinBtn').click(function() {
+	$('#signinBtn').click(() => {
 		if (signin_click == 0) {
 			$('#signup').slideUp('fast')
 			$('#signin').slideDown('fast')
@@ -38,11 +50,23 @@ $(document).ready(function() {
 			signup_click = 0
 		}
 		else if (signin_click == 1) {
+			$.post("/signin", {
+				type: $('#inputGroupSelect01').val(),
+				No: $('#ID').val(),
+				Passwd: $('#pwd').val()
+			}, (res) => {
+				console.log(res)
+				//if (res === 'false') alert("Sing in failed\nPlease check the userid and password")
+				//else {
+				//	$.cookie('id', res, { expires: 7, path: 'cookie/'})
+				//}
+			})
+			$.post("", {})
 		}
 	})
 })
 
-$(window).resize(function() {
+$(window).resize(() => {
 	ChangeWindowSize()
 	if (click_is == 0) {
 		ChangeIconSize()
@@ -51,7 +75,7 @@ $(window).resize(function() {
 	else ShowIconAfter()
 })
 
-$(function() {
+$(() => {
 	click_is = 0
 	ChangeWindowSize()
 	ChangeIconSize()
@@ -62,7 +86,7 @@ function ShowIcon() {
 	$('#icon').animate({
 		width: length_wh,
 		height: length_wh
-	}, "fast", function() {
+	}, "fast", () => {
 		$("#icon").css({
 			"min-width": "150px",
 			"min-height": "150px"
