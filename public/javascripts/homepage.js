@@ -27,18 +27,37 @@ $(document).ready(() => {
 			signin_click = 0
 		}
 		else if (signup_click == 1) {
-			$.post("/signup", {
-				Email: $('#Email').val(),
-				Name: $('#Name').val(),
-				Gender: $('#Gender').val(),
-				School: $('#School').val(),
-				Grade: $('#Grade').val(),
-				Class: $('#Class').val(),
-				SchoolNo: $('#SchoolNo').val(),
-				Passwd: $('#pwd2').val()
-			}, (res) => {
-
-			})
+			var type = $('#inputGroupSelect02').val()
+			if (type === 'Student') {
+				$.post("/signup", {
+					Email: 		$('#Email').val(),
+					Name: 		$('#Name').val(),
+					Gender: 	$('#Gender').val(),
+					School: 	$('#School').val(),
+					Type: 		$('#inputGroupSelect02').val(), 
+					Major: 		$('#MajorStudent').val(),
+					Class: 		$('#ClassStudent').val(),
+					StudentNo: 	$('#StudentNo').val(),
+					Passwd: 	$('#pwdStudent').val()
+				}, (res) => {
+					
+				})
+			}
+			else if (type === 'Teacher') {
+				$.post('/signup', {
+					Email: 		$('#Email').val(),
+					Name: 		$('#Name').val(),
+					Gender: 	$('#Gender').val(),
+					School: 	$('#School').val(),
+					Type: 		$('#inputGroupSelect02').val(), 
+					Major: 		$('#MajorTeacher').val(),
+					TeacherNo: 	$('#TeacherNo').val(),
+					Passwd: 	$('pwdTeacher').val()
+				}, (res) => {
+					
+				})
+			}
+			$('#exampleModal').modal('hide')
 		}
 	})
 
@@ -50,18 +69,26 @@ $(document).ready(() => {
 			signup_click = 0
 		}
 		else if (signin_click == 1) {
+			var re = /^([a-zA-Z0-9]+[-_\.]?)+@[a-zA-Z0-9]+\.[a-z]+$/
+			if (!re.test($('#ID').val())) {
+				$('#warning').text('Email is wrong')
+				$('#warning').slideDown('fast')
+			}
 			$.post("/signin", {
 				type: $('#inputGroupSelect01').val(),
 				No: $('#ID').val(),
 				Passwd: $('#pwd').val()
 			}, (res) => {
-				console.log(res)
+				if (res === 'false') 
+					alert ('Sign in failed \n nPlease check id and password')
+				else { 
+				}
 				//if (res === 'false') alert("Sing in failed\nPlease check the userid and password")
 				//else {
 				//	$.cookie('id', res, { expires: 7, path: 'cookie/'})
 				//}
 			})
-			$.post("", {})
+			$('#exampleModal').modal('hide')
 		}
 	})
 })
@@ -119,5 +146,17 @@ function ChangeIconSize() {
 	else {
 		length_wh = "" + ((width*0.2>150)?(width*0.2):150) + "px" 
 		font_size = "" + ((width*0.33>150)?(width*0.33):150)*0.6 + "px"
+	}
+}
+
+function selected() {
+	var select = $('#inputGroupSelect02').val();
+	if (select === 'Teacher') {
+		$('#signupTeacher').slideDown('fast')
+		$('#signupStudent').slideUp('fast')
+	}
+	else if (select === 'Student') {
+		$('#signupStudent').slideDown('fast')
+		$('#signupTeacher').slideUp('fast')
 	}
 }

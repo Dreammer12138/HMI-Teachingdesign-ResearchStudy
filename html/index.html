@@ -15,7 +15,7 @@
 			  <span class="glyphicon glyphicon-off font-white" aria-hidden="true" id="GlyphiconOff"></span>
 		</div>
         <div class="modal fade" id="exampleModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-dialog modal-dialog-centered " role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Sign In</h5>
@@ -29,7 +29,7 @@
                                 <div class="input-group-prepend prepend" sign="up">
                                     <span class="input-group-text smallfont">User&nbsp;ID</span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="E-mail" aria-label="User ID" aria-describedby="basic-addon2" id="Email">
+                                <input type="email" class="form-control" placeholder="E-mail" aria-label="User ID" aria-describedby="basic-addon2" id="Email">
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend prepend" sign="up">
@@ -43,35 +43,67 @@
                                 </div>
                                 <input type="text" class="form-control" placeholder="Gender" aria-label="Gender" aria-describedby="basic-addon2" id="Gender">
                             </div>
-                            <div class="input-group mb-3">
+                             <div class="input-group mb-3">
                                 <div class="input-group-prepend prepend" sign="up">
                                     <span class="input-group-text smallfont">School</span>
                                 </div>
                                 <input type="text" class="form-control" placeholder="School" aria-label="School" aria-describedby="basic-addon2" id="School">
                             </div>
                             <div class="input-group mb-3">
-                                <div class="input-group-prepend prepend" sign="up">
-                                    <span class="input-group-text smallfont">Grade</span>
+                                <div class="input-group-prepend prepend">
+                                    <label class="input-group-text smallfont" for="inputGroupSelect01">Type</label>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Grade" aria-label="Grade" aria-describedby="basic-addon2" id="Grade">
+                                <select class="custom-select" id="inputGroupSelect02" onchange="selected();">
+                                    <option selected>Choose...</option>
+                                    <option value="Student">Student</option>
+                                    <option value="Teacher">Teacher</option>
+                                </select>
+                            </div>
+                            <div id="signupStudent">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend prepend" sign="up">
+                                    <span class="input-group-text smallfont">Major</span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Major" aria-label="Major" aria-describedby="basic-addon2" id="MajorStudent">
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend prepend" sign="up">
                                     <span class="input-group-text smallfont">Class</span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Class" aria-label="Class" aria-describedby="basic-addon2" id="Class">
+                                <input type="text" class="form-control" placeholder="Class" aria-label="Class" aria-describedby="basic-addon2" id="ClassStudent">
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend prepend" sign="up">
-                                    <span class="input-group-text smallfont">School NO.</span>
+                                    <span class="input-group-text smallfont">StudentNO</span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="School NO." aria-label="School NO." aria-describedby="basic-addon2" id="SchoolNo">
+                                <input type="text" class="form-control" placeholder="Student No." aria-label="Student No." aria-describedby="basic-addon2" id="StudentNo">
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend prepend" sign="up">
                                     <span class="input-group-text smallfont">Password</span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon2" id="pwd2">
+                                <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon2" id="pwdStudent">
+                            </div>
+                            </div>
+                            <div id="signupTeacher">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend prepend" sign="up">
+                                    <span class="input-group-text smallfont">Major</span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Major" aria-label="Major" aria-describedby="basic-addon2" id="MajorTeacher">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend prepend" sign="up">
+                                    <span class="input-group-text smallfont">TeacherNO</span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Teacher NO." aria-label="Teacher NO." aria-describedby="basic-addon2" id="TeacherNo">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend prepend" sign="up">
+                                    <span class="input-group-text smallfont">Password</span>
+                                </div>
+                                <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon2" id="pwdTeacher">
+                            </div>
                             </div>
                         </div>
                         <div id="signin">
@@ -89,16 +121,18 @@
                                 <div class="input-group-prepend prepend">
                                     <span class="input-group-text smallfont">User&nbsp;ID</span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="E-mail" aria-label="User ID" aria-describedby="basic-addon2" id="ID">
+                                <input type="email" class="form-control" placeholder="E-mail" aria-label="User ID" aria-describedby="basic-addon2" id="ID">
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend prepend">
                                     <span class="input-group-text smallfont">Password</span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon2" id="pwd">
+                                <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon2" id="pwd">
                             </div>
+                            <div class="alert alert-warning" role="alert" id="warning"></div>
                         </div>
                     </div>
+                    
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" id="signupBtn">Sign Up</button>
                         <button type="button" class="btn btn-primary" id="signinBtn">Sign In</button>
