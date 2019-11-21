@@ -1,4 +1,6 @@
 $(document).ready(() => {
+	signined = 0
+
 	$('#icon').click(() => {
 		if (click_is == 1) return
 		$('#icon').animate({
@@ -81,12 +83,11 @@ $(document).ready(() => {
 			}, (res) => {
 				if (res === 'false') 
 					alert ('Sign in failed \n nPlease check id and password')
-				else { 
+				else {
+					signined = 1
+					hideHomepage()
+					ShowNav()
 				}
-				//if (res === 'false') alert("Sing in failed\nPlease check the userid and password")
-				//else {
-				//	$.cookie('id', res, { expires: 7, path: 'cookie/'})
-				//}
 			})
 			$('#exampleModal').modal('hide')
 		}
@@ -100,6 +101,40 @@ $(window).resize(() => {
 		ShowIcon()
 	}
 	else ShowIconAfter()
+	if (signined == 1) {
+		if (width <= 480) { 
+			if (navSite !== "top") {
+				$('#Usernav').animate({
+					width: "0%"
+				}, 'fast', () => {
+					$('#Usernav').css({
+						'height': '0%',
+						'width':  '100%'
+					})
+					$('#Usernav').animate({
+						height: '5%'
+					}, 'fast')
+				})
+				navSite = "top"
+			}
+		}
+		else {
+			if (navSite !== "right") {
+				$('#Usernav').animate({
+					height: '0%'
+				}, 'fast', () => {
+					$('#Usernav').css({
+						'width': '0%',
+						'height': '100%'
+					})
+					$('#Usernav').animate({
+						width: '20%'
+					}, 'fast')
+				})
+				navSite = "right"
+			} 
+		}
+	}
 })
 
 $(() => {
@@ -158,5 +193,35 @@ function selected() {
 	else if (select === 'Student') {
 		$('#signupStudent').slideDown('fast')
 		$('#signupTeacher').slideUp('fast')
+	}
+}
+
+function hideHomepage() {
+	if ($(window).width() <= 480) {
+		$('#page').animate({
+			bottom: "100%" 
+		}, 'slow')
+	}
+	else {
+		$('#page').animate({
+			right: "100%"
+		}, 'slow')
+	}
+}
+
+function ShowNav() {
+	if ($(window).width() <= 480) {
+		$('#Usernav').animate({
+			width: 	"100%",
+			height: "5%", 
+		}, 'fast')
+		navSite = "top"
+	}
+	else {
+		$('#Usernav').animate({
+			width: 	"20%",
+			height: "100%"
+		}, 'fast')
+		navSite = "right"
 	}
 }
