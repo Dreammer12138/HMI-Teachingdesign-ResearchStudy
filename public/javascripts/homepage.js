@@ -20,8 +20,8 @@ $(document).ready(() => {
 	var signup_click = 0
 	var signin_click = 1
 
-
 	$('#signupBtn').click(() => {
+		
 		if (signup_click == 0) {
 			$('#signup').slideDown('fast')
 			$('#signin').slideUp('fast')
@@ -29,6 +29,13 @@ $(document).ready(() => {
 			signin_click = 0
 		}
 		else if (signup_click == 1) {
+			var re = /^([a-zA-Z0-9]+[-_\.]?)+@[a-zA-Z0-9]+\.[a-z]+$/		//正则匹配邮箱地址
+			if (!re.test($('#Email').val())) {
+				$('#warning').text('Email is wrong')
+				$('#warning').slideDown('fast')
+			}
+			var isnot_num_re = /^.*[^\d].*$/
+
 			var type = $('#inputGroupSelect02').val()
 			if (type === 'Student') {
 				$.post("/signup", {
@@ -42,7 +49,17 @@ $(document).ready(() => {
 					StudentNo: 	$('#StudentNo').val(),
 					Passwd: 	$('#pwdStudent').val()
 				}, (res) => {
-					
+					if(res === "OK") {
+					//	$('#signup').slideDown('fast')
+					//	$('#signin').slideUp('fast')
+					//	signup_click = 1
+					//	signin_click = 0
+						$('#success').text('Sign Up Successfully, Please Sign In')
+						$('#success').slideDown('fast')
+						$('#warning').slideUp('fast')
+						$("input").val("")
+						$('select').val("Choose...")
+					}
 				})
 			}
 			else if (type === 'Teacher') {
@@ -54,12 +71,22 @@ $(document).ready(() => {
 					Type: 		$('#inputGroupSelect02').val(), 
 					Major: 		$('#MajorTeacher').val(),
 					TeacherNo: 	$('#TeacherNo').val(),
-					Passwd: 	$('pwdTeacher').val()
+					Passwd: 	$('#pwdTeacher').val()
 				}, (res) => {
-					
+					if(res === "OK") {
+					//	$('#signup').slideDown('fast')
+					//	$('#signin').slideUp('fast')
+					//	signup_click = 1
+					//	signin_click = 0
+						$('#success').text('Sign Up Successfully, Please Sign In')
+						$('#success').slideDown('fast')
+						$('#warning').slideUp('fast')
+						$("input").val("")
+						$('select').val("Choose...")
+					}
 				})
 			}
-			$('#exampleModal').modal('hide')
+			//$('#exampleModal').modal('hide')
 		}
 	})
 
